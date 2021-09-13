@@ -44,3 +44,11 @@ function calculateWow (){
 }
 
 });
+
+//$("#doge-meme-pic").click(function(){
+  // alert("you clicked me");
+ // var WOW=  $("#doge-meme-pi").val();
+  //console.log("WOW "  + "!");
+  
+  //$("#wow").html("WOW ");
+ //});
