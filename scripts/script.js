@@ -1,52 +1,46 @@
 $(function() {
-    console.log("document is ready!");
+  console.log("document is ready!");
 
-    // $('#doge-meme-pic').draggable().droppable();
-
-    var $start_counter = $( "#event-start" ),
-    $drag_counter = $( "#event-drag" ),
-    $stop_counter = $( "#event-stop" ),
-    counts = [ 0, 0, 0 ];
-
-  $( "#doge-meme-pic" ).draggable({
-    start: function() {
-      counts[ 0 ]++;
-      updateCounterStatus( $start_counter, counts[ 0 ] );
-    },
-    drag: function() {
-      counts[ 1 ]++;
-      updateCounterStatus( $drag_counter, counts[ 1 ] );
-    //   calculateWow($new_count); 
-    },
-    stop: function() {
-      counts[ 2 ]++;
-      updateCounterStatus( $stop_counter, counts[ 2 ] );
-    }
+  $( "button" ).click(function(){
+    console.log('clicked the button');
+    $(this).toggle(100);
+    var x = $( "#doge-meme-pic" ).position();
+   
   });
 
-  function updateCounterStatus( $event_counter, new_count ) {
-    // first update the status visually...
-    if ( !$event_counter.hasClass( "ui-state-hover" ) ) {
-      $event_counter.addClass( "ui-state-hover" )
-        .siblings().removeClass( "ui-state-hover" );
-    }
-    // ...then update the numbers
-    $( "span.count", $event_counter ).text( new_count );
-
-    calculateWow(new_count); 
+$( "#doge-meme-pic" ).draggable({
+ containment: "#containment-wrapper", scroll: false, 
+  stop: function() {
+   calculateWow();
   }
+});
 
-function calculateWow (xyz){
-
-    if(xyz < 500){
-
-        console.log('not much wow (' + xyz +  ')');
-
-    }
-    else {
-
-        console.log('so much wow (' + xyz +  ')!!!!');
-    }
+function calculateWow (){
+  var x = $( "#doge-meme-pic" ).position();
+  var wow = x.top  + x.left 
+  
+  if(wow < 500){
+    var realConsoleLog = console.log;
+    console.log = function () {
+        var message = [].join.call(arguments, " ");
+        $("#wow").text(message);
+        realConsoleLog.apply(console, arguments);
+    };
+       console.log('not much wow (' + wow +  ')');
+        
+        
+  }
+  else {
+    var realConsoleLog = console.log;
+    console.log = function () {
+        var message = [].join.call(arguments, " ");
+        $("#wow").text(message);
+        realConsoleLog.apply(console, arguments);
+    };
+    console.log('so much wow (' + wow +  ')!!!!');
+       
+    
+  }
 }
 
 });
